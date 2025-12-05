@@ -46,7 +46,9 @@ export const useAuth = () => {
   }, []);
 
   const login = (password: string): boolean => {
-    const plan = PASSWORDS[password];
+    // Normaliza a senha: converte para minúsculas e remove espaços
+    const normalizedPassword = password.toLowerCase().replace(/\s+/g, '');
+    const plan = PASSWORDS[normalizedPassword];
     if (plan) {
       localStorage.setItem("userPlan", plan);
       setAuthState({
