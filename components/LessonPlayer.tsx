@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { UpgradeModal } from "@/components/UpgradeModal";
 
 interface LessonPlayerProps {
   modules: Module[];
@@ -69,6 +70,7 @@ export const LessonPlayer = ({
   const [isMobile, setIsMobile] = useState(false);
   const [expandedModules, setExpandedModules] = useState<string[]>([]);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(true);
+  const [upgradeUrl, setUpgradeUrl] = useState<string | null>(null);
 
   const hasAccess = hasAccessToLesson(currentLesson.requiredPlan);
   const isNotYetReleased = currentLesson.releaseDate && new Date(currentLesson.releaseDate) > new Date();
@@ -148,6 +150,11 @@ export const LessonPlayer = ({
       onMouseMove={handleMouseMove}
       onClick={handleScreenClick}
     >
+      <UpgradeModal
+        isOpen={!!upgradeUrl}
+        onClose={() => setUpgradeUrl(null)}
+        url={upgradeUrl}
+      />
       <div className={`absolute top-0 left-0 right-0 p-4 md:p-6 z-20 transition-opacity duration-300 bg-linear-to-b from-black/80 to-transparent pointer-events-none flex justify-between items-start`}>
         <button onClick={onBack} className="flex items-center gap-2 text-white/80 hover:text-white transition pointer-events-auto">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -170,7 +177,7 @@ export const LessonPlayer = ({
                 ? 'min-h-[450px] md:min-h-0 md:aspect-video'
                 : 'aspect-video'
                 }`}>
-                {isNotYetReleased && currentLesson.releaseDate ? (
+                {hasAccess && isNotYetReleased && currentLesson.releaseDate ? (
                   <CountdownTimer releaseDate={currentLesson.releaseDate} lessonTitle={currentLesson.title} />
                 ) : !hasAccess ? (
                   <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-gray-900 via-black to-gray-900 overflow-y-auto">
@@ -187,7 +194,7 @@ export const LessonPlayer = ({
                       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">Vídeo Bloqueado</h3>
                       <p className="text-gray-300 mb-3 md:mb-4 text-xs md:text-base px-2">
                         Este vídeo está disponível apenas para o plano{" "}
-                        <span className="font-bold text-transparent bg-linear-to-r from-yellow-400 to-orange-500 bg-clip-text">
+                        <span className="font-bold text-transparent bg-linear-to-r from-blue-200 to-blue-400 bg-clip-text">
                           {currentLesson.requiredPlan?.toUpperCase()}
                         </span>
                       </p>
@@ -197,10 +204,42 @@ export const LessonPlayer = ({
                           {plan ? getPlanName(plan) : "Nenhum"}
                         </span>
                       </p>
-                      <div className="mt-4 md:mt-8 px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-full inline-block">
-                        <span className="text-yellow-300 text-xs md:text-sm font-medium">
-                          Faça upgrade para desbloquear
-                        </span>
+
+                      <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
+                        {plan === "prata" && (
+                          <>
+                            <button
+                              onClick={() => setUpgradeUrl('https://go.perfectpay.com.br/PPU38CQ4BET')}
+                              className="px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-yellow-500/20 to-orange-500/20 hover:from-yellow-500/30 hover:to-orange-500/30 backdrop-blur-sm border border-yellow-500/30 rounded-full transition-all group"
+                            >
+                              <span className="text-yellow-300 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+                                Upgrade para Ouro
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                              </span>
+                            </button>
+                            <button
+                              onClick={() => setUpgradeUrl('https://go.perfectpay.com.br/PPU38CQ4BF3')}
+                              className="px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 backdrop-blur-sm border border-cyan-500/30 rounded-full transition-all group"
+                            >
+                              <span className="text-cyan-300 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+                                Upgrade para Diamante
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                              </span>
+                            </button>
+                          </>
+                        )}
+
+                        {plan === "ouro" && (
+                          <button
+                            onClick={() => setUpgradeUrl('https://go.perfectpay.com.br/PPU38CQ4BF7')}
+                            className="px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 backdrop-blur-sm border border-cyan-500/30 rounded-full transition-all group"
+                          >
+                            <span className="text-cyan-300 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+                              Upgrade para Diamante
+                              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                            </span>
+                          </button>
+                        )}
                       </div>
                     </motion.div>
                   </div>
