@@ -186,9 +186,9 @@ export const LessonPlayer = ({
 
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="text-white/80 hover:text-white transition pointer-events-auto p-3 md:p-2 bg-black/50 rounded-full backdrop-blur-sm hover:bg-black/70 border border-white/10"
+          className="text-white/80 hover:text-white transition pointer-events-auto p-2 md:p-2 bg-black/50 rounded-full backdrop-blur-sm hover:bg-black/70 border border-white/10"
         >
-          <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isSidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} /></svg>
+          <svg className="w-4 h-4 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isSidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} /></svg>
         </button>
       </div>
 
@@ -368,7 +368,7 @@ export const LessonPlayer = ({
             )}
 
             {hasAccess && !isNotYetReleased && (
-              <div className="w-full max-w-7xl  mx-auto px-4 md:px-8 py-6 md:py-8">
+              <div className="w-full max-w-7xl  mx-auto px-4 md:px-8 py-6 pt-0 md:py-8">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                   <div className="w-full md:w-auto">
                     <h1 className="text-xl md:text-3xl font-bold mb-2">{currentLesson.title}</h1>
