@@ -74,6 +74,13 @@ export const courseModules: Module[] = [
                 videoId: "69325bc1f2e796b3c9e0d7af",
                 description: "Jogada Zero Zero.",
                 requiredPlan: "prata",
+                buttons: [
+                    {
+                        id: "btn-1-0",
+                        label: "SITE QUE EU MOSTRO NO VIDEO",
+                        url: "https://go.1pra1.bet.br/KAriXZ",
+                    }
+                ]
             },
             {
                 id: "lesson-4-2",
@@ -82,6 +89,13 @@ export const courseModules: Module[] = [
                 videoId: "69325bc1f2e796b3c9e0d7af",
                 description: "Jogada Red Zone.",
                 requiredPlan: "prata",
+                buttons: [
+                    {
+                        id: "btn-1-0",
+                        label: "SITE QUE EU MOSTRO NO VIDEO",
+                        url: "https://go.1pra1.bet.br/KAriXZ",
+                    }
+                ]
             },
             {
                 id: "lesson-4-3",
@@ -90,6 +104,13 @@ export const courseModules: Module[] = [
                 videoId: "69326cafafcc411b3a7204ba",
                 description: "Jogada Black Cat.",
                 requiredPlan: "ouro",
+                buttons: [
+                    {
+                        id: "btn-1-0",
+                        label: "SITE QUE EU MOSTRO NO VIDEO",
+                        url: "https://go.1pra1.bet.br/KAriXZ",
+                    }
+                ]
             },
             {
                 id: "lesson-4-5",
@@ -98,6 +119,13 @@ export const courseModules: Module[] = [
                 videoId: "69326badafcc411b3a7203e3",
                 description: "Jogada Ice Ball.",
                 requiredPlan: "diamante",
+                buttons: [
+                    {
+                        id: "btn-1-0",
+                        label: "SITE QUE EU MOSTRO NO VIDEO",
+                        url: "https://go.1pra1.bet.br/KAriXZ",
+                    }
+                ]
             },
             {
                 id: "lesson-4-6",
