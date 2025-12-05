@@ -86,7 +86,7 @@ export const courseModules: Module[] = [
                 id: "lesson-4-2",
                 title: "RED ZONE",
                 duration: "03:47",
-                videoId: "69325bc1f2e796b3c9e0d7af",
+                videoId: "6932d043c5a3364c78132d9a",
                 description: "Jogada Red Zone.",
                 requiredPlan: "prata",
                 buttons: [

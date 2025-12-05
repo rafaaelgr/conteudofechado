@@ -186,7 +186,7 @@ export const LessonPlayer = ({
                       </div>
                       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">Vídeo Bloqueado</h3>
                       <p className="text-gray-300 mb-3 md:mb-4 text-xs md:text-base px-2">
-                        Esta vídeo está disponível apenas para o plano{" "}
+                        Este vídeo está disponível apenas para o plano{" "}
                         <span className="font-bold text-transparent bg-linear-to-r from-yellow-400 to-orange-500 bg-clip-text">
                           {currentLesson.requiredPlan?.toUpperCase()}
                         </span>

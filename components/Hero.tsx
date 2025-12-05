@@ -26,16 +26,13 @@ export const Hero = ({ featuredModule, onPlay }: HeroProps) => {
 
             const randomLesson = allLessons[Math.floor(Math.random() * allLessons.length)];
 
-            // Parse duration MM:SS to seconds
             const [min, sec] = (randomLesson.duration || "00:00").split(':').map(Number);
             const durationSec = (min * 60) + sec;
 
-            // Pick random start time (leave at least 5 seconds)
             const maxStart = Math.max(0, durationSec - 10);
             const startTime = Math.floor(Math.random() * maxStart);
 
             const baseUrl = `https://scripts.converteai.net/2bad9c2e-d4ab-4547-8540-c55f45dab1e5/players/${randomLesson.videoId}/v4/embed.html`;
-            // Add random cache buster to prevent caching issues if same video selected
             const url = `${baseUrl}?autoplay=true&muted=true&controls=false&start=${startTime}&t=${startTime}`;
             setPreviewVideoUrl(url);
         };
