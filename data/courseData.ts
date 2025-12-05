@@ -86,15 +86,15 @@ export const courseModules: Module[] = [
             {
                 id: "lesson-4-3",
                 title: "BLACK CAT",
-                duration: "03:47",
-                videoId: "9326cafafcc411b3a7204ba",
+                duration: "04:05",
+                videoId: "69326cafafcc411b3a7204ba",
                 description: "Jogada Black Cat.",
                 requiredPlan: "ouro",
             },
             {
                 id: "lesson-4-5",
                 title: "ICE BALL",
-                duration: "03:47",
+                duration: "03:25",
                 videoId: "69326badafcc411b3a7203e3",
                 description: "Jogada Ice Ball.",
                 requiredPlan: "diamante",
@@ -102,7 +102,7 @@ export const courseModules: Module[] = [
             {
                 id: "lesson-4-6",
                 title: "VEGAS",
-                duration: "03:47",
+                duration: "00:00",
                 videoId: "69325bc1f2e796b3c9e0d7af",
                 description: "Jogada Vegas.",
                 requiredPlan: "diamante",
