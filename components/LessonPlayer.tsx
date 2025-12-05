@@ -18,17 +18,30 @@ interface LessonPlayerProps {
 
 const VturbVideo = ({ videoId }: { videoId: string }) => {
   const [src, setSrc] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const baseUrl = `https://scripts.converteai.net/2bad9c2e-d4ab-4547-8540-c55f45dab1e5/players/${videoId}/v4/embed.html`;
-      const fullUrl = `${baseUrl}${window.location.search || '?'}&vl=${encodeURIComponent(window.location.href)}`;
-      setSrc(fullUrl);
-    }
+    // Reset loading state quando videoId muda
+    setIsLoading(true);
+    setSrc("");
+
+    // Pequeno delay para garantir cleanup completo do iframe anterior
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        const baseUrl = `https://scripts.converteai.net/2bad9c2e-d4ab-4547-8540-c55f45dab1e5/players/${videoId}/v4/embed.html`;
+        const fullUrl = `${baseUrl}${window.location.search || '?'}&vl=${encodeURIComponent(window.location.href)}`;
+        setSrc(fullUrl);
+        setIsLoading(false);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [videoId]);
 
   useEffect(() => {
     const scriptId = "vturb-sdk";
+
+    // Carrega o script apenas uma vez
     if (!document.getElementById(scriptId)) {
       const s = document.createElement("script");
       s.id = scriptId;
@@ -38,12 +51,22 @@ const VturbVideo = ({ videoId }: { videoId: string }) => {
     }
   }, []);
 
-  if (!src) return <div className="w-full h-full bg-black animate-pulse" />;
+  if (!src || isLoading) {
+    return (
+      <div className="w-full h-full bg-black flex items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="w-16 h-16 border-4 border-[#0261FF] border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-white/60 text-sm">Carregando vídeo...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id={`ifr_${videoId}_wrapper`} className="w-full h-full flex items-center justify-center bg-black">
       <div id={`ifr_${videoId}_aspect`} className="w-full relative h-full">
         <iframe
+          key={`iframe-${videoId}`}
           frameBorder="0"
           allowFullScreen
           src={src}
@@ -256,7 +279,7 @@ export const LessonPlayer = ({
                     </motion.div>
                   </div>
                 ) : currentLesson.videoId ? (
-                  <VturbVideo videoId={currentLesson.videoId} />
+                  <VturbVideo key={currentLesson.videoId} videoId={currentLesson.videoId} />
                 ) : (
                   <>
                     <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/60 pointer-events-none"></div>
