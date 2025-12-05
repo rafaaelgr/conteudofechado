@@ -85,9 +85,6 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
                                 </span>
                                 <span className="text-white/90 ml-1">Fechado</span>
                             </h1>
-                            <span className="text-[10px] md:text-xs text-gray-400 tracking-[0.2em] font-medium uppercase opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                                Área de Membros
-                            </span>
                         </div>
                     </div>
 

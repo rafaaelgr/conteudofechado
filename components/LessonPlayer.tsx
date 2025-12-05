@@ -16,6 +16,8 @@ interface LessonPlayerProps {
   onSelectLesson: (lesson: Lesson, module: Module) => void;
 }
 
+const VTURB_ACCOUNT_ID = "2bad9c2e-d4ab-4547-8540-c55f45dab1e5";
+
 const VturbVideo = ({ videoId }: { videoId: string }) => {
   const [src, setSrc] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +30,7 @@ const VturbVideo = ({ videoId }: { videoId: string }) => {
     // Pequeno delay para garantir cleanup completo do iframe anterior
     const timer = setTimeout(() => {
       if (typeof window !== 'undefined') {
-        const baseUrl = `https://scripts.converteai.net/2bad9c2e-d4ab-4547-8540-c55f45dab1e5/players/${videoId}/v4/embed.html`;
+        const baseUrl = `https://scripts.converteai.net/${VTURB_ACCOUNT_ID}/players/${videoId}/v4/embed.html`;
         const fullUrl = `${baseUrl}${window.location.search || '?'}&vl=${encodeURIComponent(window.location.href)}`;
         setSrc(fullUrl);
         setIsLoading(false);
@@ -63,7 +65,7 @@ const VturbVideo = ({ videoId }: { videoId: string }) => {
   }
 
   return (
-    <div id={`ifr_${videoId}_wrapper`} className="w-full h-full flex items-center justify-center bg-black">
+    <div id={`ifr_${videoId}_wrapper`} className="w-full h-full flex items-center justify-center">
       <div id={`ifr_${videoId}_aspect`} className="w-full relative h-full">
         <iframe
           key={`iframe-${videoId}`}
@@ -193,11 +195,22 @@ export const LessonPlayer = ({
       </div>
 
       <div className="flex-1 flex overflow-hidden relative">
-        <div className={`relative flex-1 flex-col bg-black flex overflow-y-auto transition-all duration-500 ${isSidebarOpen && !isMobile ? 'mr-96' : 'mr-0'}`}>
+        {hasAccess && currentLesson.videoId && (
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 bg-black/60 z-10"></div>
+            <img
+              src={`https://images.converteai.net/${VTURB_ACCOUNT_ID}/players/${currentLesson.videoId}/thumbnail.jpg`}
+              className="w-full h-full object-cover blur-[100px] opacity-60 scale-125"
+              alt=""
+            />
+          </div>
+        )}
+
+        <div className={`relative z-10 flex-1 flex-col bg-transparent flex overflow-y-auto transition-all duration-500 ${isSidebarOpen && !isMobile ? 'mr-96' : 'mr-0'}`}>
           <div className="flex flex-col min-h-full">
-            <div className="relative w-full bg-black flex items-center justify-center shrink-0 min-h-[250px] md:min-h-[50vh]">
-              <div className={`w-full h-full max-w-[1920px] mx-auto bg-zinc-900 relative group overflow-hidden ${(!hasAccess || (isNotYetReleased && currentLesson.releaseDate))
-                ? 'min-h-[450px] md:min-h-0 md:aspect-video'
+            <div className="relative w-full flex items-center justify-center shrink-0 min-h-[250px] md:min-h-[50vh]">
+              <div className={`w-full h-full max-w-[1920px] mx-auto relative group overflow-hidden ${(!hasAccess || (isNotYetReleased && currentLesson.releaseDate))
+                ? 'min-h-[450px] md:min-h-0 md:aspect-video bg-zinc-900'
                 : 'aspect-video'
                 }`}>
                 {hasAccess && isNotYetReleased && currentLesson.releaseDate ? (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface CountdownTimerProps {
   releaseDate: string;
@@ -18,8 +18,10 @@ interface TimeLeft {
 export const CountdownTimer = ({ releaseDate, lessonTitle }: CountdownTimerProps) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isReleased, setIsReleased] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const calculateTimeLeft = () => {
       const difference = new Date(releaseDate).getTime() - new Date().getTime();
 
@@ -39,107 +41,108 @@ export const CountdownTimer = ({ releaseDate, lessonTitle }: CountdownTimerProps
     setTimeLeft(calculateTimeLeft());
 
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const remaining = calculateTimeLeft();
+      setTimeLeft(remaining);
     }, 1000);
 
     return () => clearInterval(timer);
   }, [releaseDate]);
 
+  if (!isMounted) return null;
+
   if (isReleased) {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center h-full bg-linear-to-br from-green-900/20 via-black to-green-900/20 p-4 md:p-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex flex-col items-center justify-center h-full bg-black/80 backdrop-blur-sm p-8"
       >
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className="text-center px-4"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", duration: 0.8 }}
+          className="text-center"
         >
-          <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-green-400 to-green-600 flex items-center justify-center shadow-[0_0_40px_rgba(34,197,94,0.5)]">
-            <svg className="w-8 h-8 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#0261FF]/20 flex items-center justify-center border border-[#0261FF]/50 shadow-[0_0_30px_rgba(2,97,255,0.3)]">
+            <svg className="w-10 h-10 text-[#0261FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Video Liberada!</h3>
-          <p className="text-gray-300 text-sm md:text-base">Recarregue a página para assistir</p>
+          <h3 className="text-3xl font-bold text-white mb-2">Conteúdo Liberado!</h3>
+          <p className="text-gray-400">Atualize a página para assistir a esta aula.</p>
         </motion.div>
       </motion.div>
     );
   }
 
-  const timeBlocks = [
-    { label: "DIAS", value: timeLeft.days, gradient: "from-purple-500 to-pink-500" },
-    { label: "HORAS", value: timeLeft.hours, gradient: "from-pink-500 to-red-500" },
-    { label: "MINUTOS", value: timeLeft.minutes, gradient: "from-red-500 to-orange-500" },
-    { label: "SEGUNDOS", value: timeLeft.seconds, gradient: "from-orange-500 to-yellow-500" },
+  const timeUnits = [
+    { label: "DIAS", value: timeLeft.days },
+    { label: "HORAS", value: timeLeft.hours },
+    { label: "MINUTOS", value: timeLeft.minutes },
+    { label: "SEGUNDOS", value: timeLeft.seconds },
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-linear-to-br from-purple-900/20 via-black to-blue-900/20 p-4 md:p-8 overflow-y-auto">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-6 md:mb-12 px-4"
-      >
-        <div className="inline-block mb-3 md:mb-4 px-4 md:px-6 py-1.5 md:py-2 bg-linear-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full">
-          <span className="text-purple-300 text-xs md:text-sm font-bold uppercase tracking-wider">Em Breve</span>
-        </div>
-        <h2 className="text-xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent px-2">
-          {lessonTitle}
-        </h2>
-        <p className="text-gray-300 text-xs md:text-lg max-w-md mx-auto px-2">
-          Falta pouco! Este vídeo exclusivo será lançado em:
-        </p>
-        <p className="text-purple-400 font-bold text-sm md:text-xl mt-2">
-          {new Date(releaseDate).toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-          })}
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 w-full max-w-4xl px-4 md:px-0">
-        {timeBlocks.map((block, index) => (
-          <motion.div
-            key={block.label}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
-            className="relative group"
-          >
-            <div className="absolute inset-0 bg-linear-to-br from-white/10 to-white/5 rounded-xl md:rounded-2xl blur-lg md:blur-xl group-hover:blur-2xl transition-all" />
-            <div className="relative bg-linear-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-6 shadow-2xl hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300 hover:scale-105">
-              <div className={`text-2xl md:text-5xl lg:text-6xl font-bold bg-linear-to-br ${block.gradient} bg-clip-text text-transparent mb-1 md:mb-3 tabular-nums`}>
-                {String(block.value).padStart(2, '0')}
-              </div>
-              <div className="text-gray-400 text-[10px] md:text-sm font-bold uppercase tracking-wider">
-                {block.label}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+    <div className="flex flex-col items-center justify-center h-full bg-black/90 p-6 md:p-12 relative overflow-hidden">
+      {/* Ambient Background */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#0261FF]/5 blur-[120px] rounded-full opacity-50" />
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#0261FF]/5 blur-[120px] rounded-full opacity-50" />
       </div>
 
-      <motion.div
-        animate={{
-          scale: [1, 1.05, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
-      </motion.div>
+      <div className="relative z-10 flex flex-col items-center max-w-4xl w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0261FF]/10 border border-[#0261FF]/20 backdrop-blur-md mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#0261FF] animate-pulse" />
+            <span className="text-[#0261FF] text-xs font-bold tracking-widest uppercase">Em Breve</span>
+          </div>
+
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight leading-tight">
+            {lessonTitle}
+          </h2>
+
+          <div className="flex items-center justify-center gap-2 text-gray-400 text-sm md:text-base">
+            <span>Disponível em</span>
+            <span className="text-white font-medium">
+              {new Date(releaseDate).toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </span>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-12 w-full">
+          {timeUnits.map((unit, index) => (
+            <motion.div
+              key={unit.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
+              className="flex flex-col items-center group"
+            >
+              <div className="relative">
+                <div className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter tabular-nums leading-none group-hover:text-[#0261FF] transition-colors duration-500">
+                  {String(unit.value).padStart(2, '0')}
+                </div>
+                <div className="absolute -inset-4 bg-[#0261FF]/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              <span className="mt-4 text-xs md:text-sm font-medium text-gray-500 tracking-[0.2em] group-hover:text-[#0261FF]/80 transition-colors duration-300">
+                {unit.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
