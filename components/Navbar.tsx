@@ -138,6 +138,48 @@ export const Navbar = ({ onLogout }: NavbarProps) => {
                                     </div>
 
                                     <div className="p-2">
+                                        {plan === "prata" && (
+                                            <div className="flex flex-col gap-1 mb-2">
+                                                <button
+                                                    onClick={() => window.open('https://checkout.mycheckout.com.br/checkout/663d19a0084365400d92383c', '_blank')}
+                                                    className="w-full px-3 py-2.5 text-left text-sm text-yellow-400 hover:bg-yellow-500/10 hover:text-yellow-300 rounded-xl transition-colors flex items-center gap-3 group"
+                                                >
+                                                    <div className="w-4 h-4 rounded-full bg-linear-to-r from-yellow-400 to-orange-500 flex items-center justify-center shrink-0">
+                                                        <svg className="w-2.5 h-2.5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    Upgrade para Ouro
+                                                </button>
+                                                <button
+                                                    onClick={() => window.open('https://checkout.mycheckout.com.br/checkout/663d19d6084365400d923841', '_blank')}
+                                                    className="w-full px-3 py-2.5 text-left text-sm text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 rounded-xl transition-colors flex items-center gap-3 group"
+                                                >
+                                                    <div className="w-4 h-4 rounded-full bg-linear-to-r from-cyan-400 to-blue-600 flex items-center justify-center shrink-0">
+                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    Upgrade para Diamante
+                                                </button>
+                                            </div>
+                                        )}
+
+                                        {plan === "ouro" && (
+                                            <div className="mb-2">
+                                                <button
+                                                    onClick={() => window.open('https://checkout.mycheckout.com.br/checkout/663d19d6084365400d923841', '_blank')}
+                                                    className="w-full px-3 py-2.5 text-left text-sm text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 rounded-xl transition-colors flex items-center gap-3 group"
+                                                >
+                                                    <div className="w-4 h-4 rounded-full bg-linear-to-r from-cyan-400 to-blue-600 flex items-center justify-center shrink-0">
+                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    Upgrade para Diamante
+                                                </button>
+                                            </div>
+                                        )}
 
                                         <div className="h-px bg-white/10 my-2 mx-2"></div>
 

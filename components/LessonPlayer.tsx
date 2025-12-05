@@ -236,7 +236,7 @@ export const LessonPlayer = ({
                               {isLessonCompleted(currentLesson.id) && (
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                               )}
-                              {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Assisti Completo'}
+                              {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Concluir'}
                             </button>
 
                             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-white/80 hover:text-white hover:scale-110 transition p-3 md:p-2 bg-white/10 rounded-full backdrop-blur-sm">
@@ -284,8 +284,8 @@ export const LessonPlayer = ({
                       : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
                       }`}
                   >
-                    <span className="hidden md:inline">Próxima Video</span>
-                    <span className="md:hidden">Próxima</span>
+                    <span className="hidden md:inline">Próximo Video</span>
+                    <span className="md:hidden">Próximo</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -312,7 +312,7 @@ export const LessonPlayer = ({
                         {isLessonCompleted(currentLesson.id) && (
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                         )}
-                        {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Assisti Completo'}
+                        {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Concluir'}
                       </button>
                       <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-white/80 hover:text-white hover:scale-110 transition p-3 md:p-2 bg-white/10 rounded-full backdrop-blur-sm">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
@@ -352,8 +352,8 @@ export const LessonPlayer = ({
                       : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
                       }`}
                   >
-                    <span className="hidden md:inline">Próxima Video</span>
-                    <span className="md:hidden">Próxima</span>
+                    <span className="hidden md:inline">Próximo Video</span>
+                    <span className="md:hidden">Próximo</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

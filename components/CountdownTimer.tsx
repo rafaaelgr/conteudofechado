@@ -122,20 +122,6 @@ export const CountdownTimer = ({ releaseDate, lessonTitle }: CountdownTimerProps
       </div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-6 md:mt-12 text-center px-4"
-      >
-        <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm border border-purple-500/30 rounded-full">
-          <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-          <span className="text-purple-300 text-xs md:text-sm font-medium">
-            Prepare-se para uma jogada incrível!
-          </span>
-        </div>
-      </motion.div>
-
-      <motion.div
         animate={{
           scale: [1, 1.05, 1],
           opacity: [0.5, 0.8, 0.5],
