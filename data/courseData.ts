@@ -86,7 +86,7 @@ export const courseModules: Module[] = [
                 id: "lesson-4-2",
                 title: "RED ZONE",
                 duration: "03:47",
-                videoId: "6932d043c5a3364c78132d9a",
+                videoId: "69332b2544e4e1560f6d8767",
                 description: "Jogada Red Zone.",
                 requiredPlan: "prata",
                 releaseDate: "2025-12-05T20:00:00",
@@ -102,10 +102,9 @@ export const courseModules: Module[] = [
                 id: "lesson-4-3",
                 title: "BLACK CAT",
                 duration: "04:05",
-                videoId: "69326cafafcc411b3a7204ba",
+                videoId: "69332c3577723b2a72ccce4f",
                 description: "Jogada Black Cat.",
                 requiredPlan: "ouro",
-                releaseDate: "2025-12-06T00:00:00",
                 // buttons: [
                 //     {
                 //         id: "btn-1-0",
