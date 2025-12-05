@@ -33,12 +33,12 @@ export const courseModules: Module[] = [
         ],
     },
     {
-        id: "module-3",
+        id: "module-2",
         title: "DICAS DO CABRAL",
         description: "Jogadas práticas",
         lessons: [
             {
-                id: "lesson-1-2",
+                id: "lesson-2-1",
                 title: "TUDO SOBRE A ROLETA",
                 duration: "21:16",
                 videoId: "69325ad52c6468ef6505dee5",
@@ -46,14 +46,14 @@ export const courseModules: Module[] = [
                 requiredPlan: "prata",
                 buttons: [
                     {
-                        id: "btn-1-0",
+                        id: "btn-2-1",
                         label: "SITE QUE EU MOSTRO NO VIDEO",
                         url: "https://go.1pra1.bet.br/KAriXZ",
                     }
                 ]
             },
             {
-                id: "lesson-2-1",
+                id: "lesson-2-2",
                 title: "MEU GERENCIAMENTO",
                 duration: "02:27",
                 videoId: "6932571077485fe7cdad9045",
@@ -76,7 +76,7 @@ export const courseModules: Module[] = [
                 requiredPlan: "prata",
                 buttons: [
                     {
-                        id: "btn-1-0",
+                        id: "btn-4-1",
                         label: "SITE QUE EU MOSTRO NO VIDEO",
                         url: "https://go.1pra1.bet.br/KAriXZ",
                     }
@@ -91,7 +91,7 @@ export const courseModules: Module[] = [
                 requiredPlan: "prata",
                 buttons: [
                     {
-                        id: "btn-1-0",
+                        id: "btn-4-2",
                         label: "SITE QUE EU MOSTRO NO VIDEO",
                         url: "https://go.1pra1.bet.br/KAriXZ",
                     }
@@ -122,7 +122,7 @@ export const courseModules: Module[] = [
                 requiredPlan: "diamante",
                 buttons: [
                     {
-                        id: "btn-1-0",
+                        id: "btn-4-5",
                         label: "SITE QUE EU MOSTRO NO VIDEO",
                         url: "https://go.1pra1.bet.br/KAriXZ",
                     }
@@ -145,7 +145,7 @@ export const courseModules: Module[] = [
         description: "Canais de ajuda e ofertas",
         lessons: [
             {
-                id: "lesson-4-1",
+                id: "lesson-5-1",
                 title: "SUPORTE",
                 duration: "00:25",
                 videoId: "6932547d4d2612824eaca523",
@@ -155,7 +155,7 @@ export const courseModules: Module[] = [
                 email: "suporte@allacabral.com.br",
                 buttons: [
                     {
-                        id: "btn-4-1",
+                        id: "btn-5-1",
                         label: "SUPORTE VIA INSTAGRAM",
                         url: "https://instagram.com/suportedocabral/",
                         variant: "instagram"

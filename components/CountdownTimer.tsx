@@ -92,7 +92,7 @@ export const CountdownTimer = ({ releaseDate, lessonTitle }: CountdownTimerProps
           {lessonTitle}
         </h2>
         <p className="text-gray-300 text-xs md:text-lg max-w-md mx-auto px-2">
-          Falta pouco! Este vídeo exclusivo será lançada em:
+          Falta pouco! Este vídeo exclusivo será lançado em:
         </p>
         <p className="text-purple-400 font-bold text-sm md:text-xl mt-2">
           {new Date(releaseDate).toLocaleDateString('pt-BR', {
