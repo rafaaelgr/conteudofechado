@@ -147,36 +147,39 @@ export const LessonPlayer = ({
         <div className={`relative flex-1 flex-col bg-black flex overflow-y-auto transition-all duration-500 ${isSidebarOpen && !isMobile ? 'mr-96' : 'mr-0'}`}>
           <div className="flex flex-col min-h-full">
             <div className="relative w-full bg-black flex items-center justify-center shrink-0 min-h-[250px] md:min-h-[50vh]">
-              <div className="w-full h-full max-w-[1920px] mx-auto aspect-video bg-zinc-900 relative group overflow-hidden">
+              <div className={`w-full h-full max-w-[1920px] mx-auto bg-zinc-900 relative group overflow-hidden ${(!hasAccess || (isNotYetReleased && currentLesson.releaseDate))
+                ? 'min-h-[450px] md:min-h-0 md:aspect-video'
+                : 'aspect-video'
+                }`}>
                 {isNotYetReleased && currentLesson.releaseDate ? (
                   <CountdownTimer releaseDate={currentLesson.releaseDate} lessonTitle={currentLesson.title} />
                 ) : !hasAccess ? (
-                  <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-gray-900 via-black to-gray-900">
+                  <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-gray-900 via-black to-gray-900 overflow-y-auto">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="text-center p-8 max-w-lg"
+                      className="text-center p-4 md:p-8 max-w-lg mx-4"
                     >
-                      <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-br from-red-500/20 to-orange-500/20 backdrop-blur-sm border border-red-500/30 flex items-center justify-center">
-                        <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-red-500/20 to-orange-500/20 backdrop-blur-sm border border-red-500/30 flex items-center justify-center">
+                        <svg className="w-8 h-8 md:w-10 md:h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Aula Bloqueada</h3>
-                      <p className="text-gray-300 mb-4 text-sm md:text-base">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">Aula Bloqueada</h3>
+                      <p className="text-gray-300 mb-3 md:mb-4 text-xs md:text-base px-2">
                         Esta aula está disponível apenas para o plano{" "}
                         <span className="font-bold text-transparent bg-linear-to-r from-yellow-400 to-orange-500 bg-clip-text">
                           {currentLesson.requiredPlan?.toUpperCase()}
                         </span>
                         {" "}ou superior.
                       </p>
-                      <p className="text-gray-400 text-xs md:text-sm">
+                      <p className="text-gray-400 text-xs md:text-sm mb-4 md:mb-6">
                         Seu plano atual:{" "}
                         <span className="font-bold text-gray-300">
                           {plan ? getPlanName(plan) : "Nenhum"}
                         </span>
                       </p>
-                      <div className="mt-8 px-6 py-3 bg-linear-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-full inline-block">
+                      <div className="mt-4 md:mt-8 px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-full inline-block">
                         <span className="text-yellow-300 text-xs md:text-sm font-medium">
                           Faça upgrade para desbloquear
                         </span>
@@ -229,9 +232,8 @@ export const LessonPlayer = ({
               </div>
             </div>
 
-            {/* Title and Description below video - only for accessible lessons */}
             {hasAccess && !isNotYetReleased && (
-              <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
+              <div className="w-full max-w-7xl  mx-auto px-4 md:px-8 py-6 md:py-8">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                   <div className="w-full md:w-auto">
                     <h1 className="text-xl md:text-3xl font-bold mb-2">{currentLesson.title}</h1>
