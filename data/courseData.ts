@@ -104,13 +104,14 @@ export const courseModules: Module[] = [
                 videoId: "69326cafafcc411b3a7204ba",
                 description: "Jogada Black Cat.",
                 requiredPlan: "ouro",
-                buttons: [
-                    {
-                        id: "btn-1-0",
-                        label: "SITE QUE EU MOSTRO NO VIDEO",
-                        url: "https://go.1pra1.bet.br/KAriXZ",
-                    }
-                ]
+                releaseDate: "2025-12-06T00:00:00",
+                // buttons: [
+                //     {
+                //         id: "btn-1-0",
+                //         label: "SITE QUE EU MOSTRO NO VIDEO",
+                //         url: "https://go.1pra1.bet.br/KAriXZ",
+                //     }
+                // ]
             },
             {
                 id: "lesson-4-5",
