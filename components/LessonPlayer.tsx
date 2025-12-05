@@ -73,12 +73,12 @@ export const LessonPlayer = ({
   const hasAccess = hasAccessToLesson(currentLesson.requiredPlan);
   const isNotYetReleased = currentLesson.releaseDate && new Date(currentLesson.releaseDate) > new Date();
 
-  // Criar lista plana de todas as aulas com seus módulos
+  // Criar lista plana de todas as Videos com seus módulos
   const allLessons = modules.flatMap(module =>
     module.lessons.map(lesson => ({ lesson, module }))
   );
 
-  // Encontrar índice da aula atual
+  // Encontrar índice da Video atual
   const currentLessonIndex = allLessons.findIndex(
     item => item.lesson.id === currentLesson.id
   );
@@ -184,9 +184,9 @@ export const LessonPlayer = ({
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                       </div>
-                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">Aula Bloqueada</h3>
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">Video Bloqueado</h3>
                       <p className="text-gray-300 mb-3 md:mb-4 text-xs md:text-base px-2">
-                        Esta aula está disponível apenas para o plano{" "}
+                        Esta Video está disponível apenas para o plano{" "}
                         <span className="font-bold text-transparent bg-linear-to-r from-yellow-400 to-orange-500 bg-clip-text">
                           {currentLesson.requiredPlan?.toUpperCase()}
                         </span>
@@ -236,7 +236,7 @@ export const LessonPlayer = ({
                               {isLessonCompleted(currentLesson.id) && (
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                               )}
-                              {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Concluir Aula'}
+                              {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Assisti Completo'}
                             </button>
 
                             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-white/80 hover:text-white hover:scale-110 transition p-3 md:p-2 bg-white/10 rounded-full backdrop-blur-sm">
@@ -251,7 +251,7 @@ export const LessonPlayer = ({
               </div>
             </div>
 
-            {/* Navegação para aulas bloqueadas ou com countdown */}
+            {/* Navegação para Videos bloqueadas ou com countdown */}
             {(!hasAccess || isNotYetReleased) && (
               <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
                 <div className="flex items-center justify-between gap-4">
@@ -266,13 +266,13 @@ export const LessonPlayer = ({
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span className="hidden md:inline">Aula Anterior</span>
+                    <span className="hidden md:inline">Video Anterior</span>
                     <span className="md:hidden">Anterior</span>
                   </button>
 
                   <div className="flex-1 text-center">
                     <p className="text-gray-400 text-xs md:text-sm">
-                      Aula {currentLessonIndex + 1} de {allLessons.length}
+                      Video {currentLessonIndex + 1} de {allLessons.length}
                     </p>
                   </div>
 
@@ -284,7 +284,7 @@ export const LessonPlayer = ({
                       : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
                       }`}
                   >
-                    <span className="hidden md:inline">Próxima Aula</span>
+                    <span className="hidden md:inline">Próxima Video</span>
                     <span className="md:hidden">Próxima</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -312,7 +312,7 @@ export const LessonPlayer = ({
                         {isLessonCompleted(currentLesson.id) && (
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                         )}
-                        {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Concluir Aula'}
+                        {isLessonCompleted(currentLesson.id) ? 'Concluído' : 'Assisti Completo'}
                       </button>
                       <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-white/80 hover:text-white hover:scale-110 transition p-3 md:p-2 bg-white/10 rounded-full backdrop-blur-sm">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
@@ -334,13 +334,13 @@ export const LessonPlayer = ({
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span className="hidden md:inline">Aula Anterior</span>
+                    <span className="hidden md:inline">Video Anterior</span>
                     <span className="md:hidden">Anterior</span>
                   </button>
 
                   <div className="flex-1 text-center">
                     <p className="text-gray-400 text-xs md:text-sm">
-                      Aula {currentLessonIndex + 1} de {allLessons.length}
+                      Video {currentLessonIndex + 1} de {allLessons.length}
                     </p>
                   </div>
 
@@ -352,7 +352,7 @@ export const LessonPlayer = ({
                       : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
                       }`}
                   >
-                    <span className="hidden md:inline">Próxima Aula</span>
+                    <span className="hidden md:inline">Próxima Video</span>
                     <span className="md:hidden">Próxima</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -474,7 +474,7 @@ export const LessonPlayer = ({
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                   <span className="w-1 h-6 bg-[#0261FF] rounded-full"></span>
-                  Aulas
+                  Videos
                 </h3>
                 <div className="space-y-6">
                   {modules.map((module, mIdx) => (

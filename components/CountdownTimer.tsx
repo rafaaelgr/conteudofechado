@@ -63,7 +63,7 @@ export const CountdownTimer = ({ releaseDate, lessonTitle }: CountdownTimerProps
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Aula Liberada!</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Video Liberada!</h3>
           <p className="text-gray-300 text-sm md:text-base">Recarregue a página para assistir</p>
         </motion.div>
       </motion.div>
@@ -92,7 +92,7 @@ export const CountdownTimer = ({ releaseDate, lessonTitle }: CountdownTimerProps
           {lessonTitle}
         </h2>
         <p className="text-gray-300 text-xs md:text-lg max-w-md mx-auto px-2">
-          Falta pouco! Esta aula exclusiva será lançada em:
+          Falta pouco! Este video exclusiva será lançada em:
         </p>
         <p className="text-purple-400 font-bold text-sm md:text-xl mt-2">
           10 de Dezembro de 2025

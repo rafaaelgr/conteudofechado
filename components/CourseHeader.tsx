@@ -28,7 +28,7 @@ export const CourseHeader = ({ modules }: CourseHeaderProps) => {
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold">Progresso Geral</span>
             <span className="text-sm font-bold">
-              {completedLessons}/{totalLessons} aulas
+              {completedLessons}/{totalLessons} Videos
             </span>
           </div>
           <div className="w-full h-3 bg-white/20 rounded-full overflow-hidden">
