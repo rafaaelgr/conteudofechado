@@ -41,13 +41,8 @@ export const ModuleCard = ({ module, onSelectModule, index, isLocked = false }: 
       onMouseEnter={() => !isLocked && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => !isLocked && onSelectModule(module.id)}
+      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
-      <img
-        src={bgImage}
-        alt={module.title}
-        className={`w-full h-full object-cover rounded-lg border border-white/5 group-hover:border-[#0261FF]/50 transition-colors ${isLocked ? 'opacity-30 grayscale' : ''}`}
-      />
-
       {isLocked && module.requiredPlan && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 rounded-lg backdrop-blur-sm">
           <div className="text-center p-4">
