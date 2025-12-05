@@ -195,7 +195,7 @@ export const LessonPlayer = ({
                       <p className="text-gray-300 mb-3 md:mb-4 text-xs md:text-base px-2">
                         Este vídeo está disponível apenas para o plano{" "}
                         <span className="font-bold text-transparent bg-linear-to-r from-blue-200 to-blue-400 bg-clip-text">
-                          {currentLesson.requiredPlan?.toUpperCase()}
+                          {currentLesson.requiredPlan === "ouro" ? "OURO E DIAMANTE" : currentLesson.requiredPlan?.toUpperCase()}
                         </span>
                       </p>
                       <p className="text-gray-400 text-xs md:text-sm mb-4 md:mb-6">
@@ -206,7 +206,7 @@ export const LessonPlayer = ({
                       </p>
 
                       <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
-                        {plan === "prata" && (
+                        {plan === "prata" && currentLesson.requiredPlan === "ouro" && (
                           <>
                             <button
                               onClick={() => setUpgradeUrl('https://go.perfectpay.com.br/PPU38CQ4BET')}
@@ -229,7 +229,19 @@ export const LessonPlayer = ({
                           </>
                         )}
 
-                        {plan === "ouro" && (
+                        {plan === "prata" && currentLesson.requiredPlan === "diamante" && (
+                          <button
+                            onClick={() => setUpgradeUrl('https://go.perfectpay.com.br/PPU38CQ4BF3')}
+                            className="px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 backdrop-blur-sm border border-cyan-500/30 rounded-full transition-all group"
+                          >
+                            <span className="text-cyan-300 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+                              Upgrade para Diamante
+                              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                            </span>
+                          </button>
+                        )}
+
+                        {plan === "ouro" && currentLesson.requiredPlan === "diamante" && (
                           <button
                             onClick={() => setUpgradeUrl('https://go.perfectpay.com.br/PPU38CQ4BF7')}
                             className="px-4 md:px-6 py-2 md:py-3 bg-linear-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 backdrop-blur-sm border border-cyan-500/30 rounded-full transition-all group"
