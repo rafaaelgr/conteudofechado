@@ -73,6 +73,33 @@ export const LessonPlayer = ({
   const hasAccess = hasAccessToLesson(currentLesson.requiredPlan);
   const isNotYetReleased = currentLesson.releaseDate && new Date(currentLesson.releaseDate) > new Date();
 
+  // Criar lista plana de todas as aulas com seus módulos
+  const allLessons = modules.flatMap(module =>
+    module.lessons.map(lesson => ({ lesson, module }))
+  );
+
+  // Encontrar índice da aula atual
+  const currentLessonIndex = allLessons.findIndex(
+    item => item.lesson.id === currentLesson.id
+  );
+
+  const hasPrevious = currentLessonIndex > 0;
+  const hasNext = currentLessonIndex < allLessons.length - 1;
+
+  const handlePrevious = () => {
+    if (hasPrevious) {
+      const previous = allLessons[currentLessonIndex - 1];
+      onSelectLesson(previous.lesson, previous.module);
+    }
+  };
+
+  const handleNext = () => {
+    if (hasNext) {
+      const next = allLessons[currentLessonIndex + 1];
+      onSelectLesson(next.lesson, next.module);
+    }
+  };
+
   useEffect(() => {
     if (currentModule) {
       setExpandedModules(prev => {
@@ -232,6 +259,49 @@ export const LessonPlayer = ({
               </div>
             </div>
 
+            {/* Navegação para aulas bloqueadas ou com countdown */}
+            {(!hasAccess || isNotYetReleased) && (
+              <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
+                <div className="flex items-center justify-between gap-4">
+                  <button
+                    onClick={handlePrevious}
+                    disabled={!hasPrevious}
+                    className={`flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-full font-bold text-sm transition-all ${hasPrevious
+                      ? 'bg-white/10 text-white hover:bg-white/20 border border-white/10 hover:border-white/20'
+                      : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
+                      }`}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span className="hidden md:inline">Aula Anterior</span>
+                    <span className="md:hidden">Anterior</span>
+                  </button>
+
+                  <div className="flex-1 text-center">
+                    <p className="text-gray-400 text-xs md:text-sm">
+                      Aula {currentLessonIndex + 1} de {allLessons.length}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={handleNext}
+                    disabled={!hasNext}
+                    className={`flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-full font-bold text-sm transition-all ${hasNext
+                      ? 'bg-[#0261FF] text-white hover:bg-[#0261FF]/80 hover:shadow-[0_0_15px_rgba(2,97,255,0.4)]'
+                      : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
+                      }`}
+                  >
+                    <span className="hidden md:inline">Próxima Aula</span>
+                    <span className="md:hidden">Próxima</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            )}
+
             {hasAccess && !isNotYetReleased && (
               <div className="w-full max-w-7xl  mx-auto px-4 md:px-8 py-6 md:py-8">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
@@ -257,6 +327,45 @@ export const LessonPlayer = ({
                       </button>
                     </div>
                   )}
+                </div>
+
+                {/* Botões de Navegação */}
+                <div className="flex items-center justify-between gap-4 mb-6 pb-6 border-b border-white/5">
+                  <button
+                    onClick={handlePrevious}
+                    disabled={!hasPrevious}
+                    className={`flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-full font-bold text-sm transition-all ${hasPrevious
+                      ? 'bg-white/10 text-white hover:bg-white/20 border border-white/10 hover:border-white/20'
+                      : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
+                      }`}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span className="hidden md:inline">Aula Anterior</span>
+                    <span className="md:hidden">Anterior</span>
+                  </button>
+
+                  <div className="flex-1 text-center">
+                    <p className="text-gray-400 text-xs md:text-sm">
+                      Aula {currentLessonIndex + 1} de {allLessons.length}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={handleNext}
+                    disabled={!hasNext}
+                    className={`flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-full font-bold text-sm transition-all ${hasNext
+                      ? 'bg-[#0261FF] text-white hover:bg-[#0261FF]/80 hover:shadow-[0_0_15px_rgba(2,97,255,0.4)]'
+                      : 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
+                      }`}
+                  >
+                    <span className="hidden md:inline">Próxima Aula</span>
+                    <span className="md:hidden">Próxima</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
 
                 {(currentLesson.content || (currentLesson.buttons && currentLesson.buttons.length > 0)) && (
@@ -322,7 +431,7 @@ export const LessonPlayer = ({
                                       case 'outline':
                                         return 'bg-transparent text-white hover:bg-white/5 border-white/20';
                                       default:
-                                        return 'bg-[#0261FF] text-white hover:bg-[#0261FF]/80 hover:shadow-[0_0_15px_rgba(2,97,255,0.4)] border-transparent';
+                                        return 'bg-blue-400 text-white hover:bg-blue-400/80 hover:shadow-[0_0_15px_rgba(2,97,255,0.4)] border-transparent';
                                     }
                                   };
 
