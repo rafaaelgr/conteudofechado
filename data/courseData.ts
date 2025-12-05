@@ -123,7 +123,7 @@ export const courseModules: Module[] = [
                 description: "Como obter ajuda.",
                 requiredPlan: "prata",
                 content: "Precisa de ajuda? Entre em contato com nosso suporte.",
-                email: "suportedocabral@gmail.com",
+                email: "suporte@allacabral.com.br",
                 buttons: [
                     {
                         id: "btn-4-1",

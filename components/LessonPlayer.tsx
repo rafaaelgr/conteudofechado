@@ -131,14 +131,6 @@ export const LessonPlayer = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (showControls) {
-      timeout = setTimeout(() => setShowControls(false), 4000);
-    }
-    return () => clearTimeout(timeout);
-  }, [showControls]);
-
   const handleMouseMove = () => {
     setShowControls(true);
   };
@@ -156,7 +148,7 @@ export const LessonPlayer = ({
       onMouseMove={handleMouseMove}
       onClick={handleScreenClick}
     >
-      <div className={`absolute top-0 left-0 right-0 p-4 md:p-6 z-20 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'} bg-linear-to-b from-black/80 to-transparent pointer-events-none flex justify-between items-start`}>
+      <div className={`absolute top-0 left-0 right-0 p-4 md:p-6 z-20 transition-opacity duration-300 bg-linear-to-b from-black/80 to-transparent pointer-events-none flex justify-between items-start`}>
         <button onClick={onBack} className="flex items-center gap-2 text-white/80 hover:text-white transition pointer-events-auto">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
           <span className="font-bold text-base md:text-lg">Voltar</span>
@@ -226,7 +218,7 @@ export const LessonPlayer = ({
                     </div>
 
                     <div
-                      className={`absolute bottom-0 left-0 right-0 p-4 md:p-8 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'} bg-linear-to-t from-black/90 via-black/60 to-transparent`}
+                      className={`absolute bottom-0 left-0 right-0 p-4 md:p-8 transition-opacity duration-300 bg-linear-to-t from-black/90 via-black/60 to-transparent`}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className="max-w-7xl mx-auto w-full">
