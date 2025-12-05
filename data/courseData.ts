@@ -89,13 +89,14 @@ export const courseModules: Module[] = [
                 videoId: "6932d043c5a3364c78132d9a",
                 description: "Jogada Red Zone.",
                 requiredPlan: "prata",
-                buttons: [
-                    {
-                        id: "btn-4-2",
-                        label: "SITE QUE EU MOSTRO NO VIDEO",
-                        url: "https://go.1pra1.bet.br/KAriXZ",
-                    }
-                ]
+                releaseDate: "2025-12-05T20:00:00",
+                // buttons: [
+                //     {
+                //         id: "btn-4-2",
+                //         label: "SITE QUE EU MOSTRO NO VIDEO",
+                //         url: "https://go.1pra1.bet.br/KAriXZ",
+                //     }
+                // ]
             },
             {
                 id: "lesson-4-3",
