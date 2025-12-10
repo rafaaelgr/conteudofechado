@@ -135,7 +135,7 @@ export const courseModules: Module[] = [
                 videoId: "69325bc1f2e796b3c9e0d7af",
                 description: "Jogada Vegas.",
                 requiredPlan: "diamante",
-                releaseDate: "2025-12-10T00:00:00",
+                releaseDate: "2025-12-15T00:00:00",
             }
         ],
     },
